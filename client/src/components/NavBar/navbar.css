@@ -1,4 +1,4 @@
-/* Base styles */
+
 :root {
     --dark: #1A1A1A;
     --dark-light: #2A2A2A;
@@ -28,8 +28,7 @@
     margin: 0 auto;
     padding: 2rem;
   }
-  
-  /* Glitch title */
+
   .glitch-title {
     font-size: 3rem;
     font-weight: bold;
@@ -88,8 +87,7 @@
       transform: translate(0);
     }
   }
-  
-  /* Gallery container */
+
   .gallery-container {
     border: 4px solid var(--gold);
     background-color: var(--dark-light);
@@ -126,8 +124,7 @@
     font-weight: bold;
     font-family: 'Courier New', monospace;
   }
-  
-  /* Gallery */
+
   .gallery {
     position: relative;
     height: 500px;
@@ -292,7 +289,6 @@
     background-color: var(--gold);
   }
   
-  /* CTA Button */
   .cta-container {
     text-align: center;
     margin-top: 2rem;

@@ -4,13 +4,13 @@ import { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Github, Instagram, Linkedin, Phone, Search, Menu, X, ChevronDown } from "lucide-react"
 import { useGlitch } from "@/hooks/use-glitch"
-import { randomGlitch } from "@/utils/effects/glitch-effects"
+import { randomGlitch } from "@/lib/glitch-effects"
 import './navbar.css';
 import SearchBar from "../SearchBar/SearchBar"
 
 export default function NavigationBar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [searchActive, setSearchActive] = useState(false)
+  // const [searchActive, setSearchActive] = useState(false)
   const [activeSubmenu, setActiveSubmenu] = useState(null)
 
   const logoRef = useRef(null)
@@ -68,7 +68,7 @@ export default function NavigationBar() {
   }, [setLogoGlitchRef, setMenuGlitchRef])
 
   return (
-    <header className="relative w-full">
+    <header className="w-full sticky top-0 left-0 z-50 bg-secondary-foreground">
       {/* Main Navigation Bar */}
       <nav className="flex items-center justify-between px-4 py-3 bg-dark border-b-4 border-gold">
         {/* Logo */}
@@ -194,14 +194,14 @@ export default function NavigationBar() {
               {activeSubmenu === "services" && (
                 <div className="pl-6 space-y-4 text-2xl content-glitching">
                   <Link
-                    to="/services/skills"
+                    to="/services#skills"
                     className="nav-item block border-b border-dark hover:border-gold pb-1 transition-all"
                     onClick={toggleMenu}
                   >
                     SKILLS
                   </Link>
                   <Link
-                    to="/services/what-can-i-do"
+                    to="/services#services"
                     className="nav-item block border-b border-dark hover:border-gold pb-1 transition-all"
                     onClick={toggleMenu}
                   >
@@ -210,6 +210,14 @@ export default function NavigationBar() {
                 </div>
               )}
             </div>
+
+            <Link
+                to="/side-quests"
+                className="nav-item border-b-2 border-dark hover:border-gold pb-2 transition-all"
+                onClick={toggleMenu}
+              >
+                SIDE QUESTS
+            </Link>
           </div>
 
           {/* Social Media Icons */}

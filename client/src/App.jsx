@@ -3,6 +3,11 @@ import Footer from "./components/Footer/Footer"
 import Scrollbar from "./components/Scrollbar/Scrollbar"
 import Home from "./pages/Home"
 import NavigationBar from "./components/NavBar/NavigationBar"
+import BlogPage from "./pages/BlogPages/BlogPage"
+import About from "./pages/About"
+import NotFound from "./pages/NotFound"
+import ContactMe from "./pages/ContactMe"
+import Services from "./pages/Services"
 
 const Layout = () => {
   return (
@@ -30,23 +35,31 @@ function App() {
         },
         {
           path: '/about',
-          element: <div>about me</div>
-        },
-        {
-          path: '/side-quests',
-          element: <div>side quests</div>
+          element: <About />
         },
         {
           path: '/contact',
-          element: <div>contact me</div>
+          element: <ContactMe />
         },
+        {
+          path: '/side-quests',
+          element: <BlogPage />
+        },
+        {
+          path: '/services',
+          element: <Services />
+        },
+        {
+          path: '*',
+          element: <NotFound />
+        }
       ]
     }
   ])
   return (
-    <>
+    <main className="bg-black">
       {element}
-    </>
+    </main>
   )
 }
 

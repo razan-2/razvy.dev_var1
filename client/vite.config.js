@@ -9,4 +9,7 @@ export default defineConfig({
       '@': '/src',  // Define the alias for the src folder
     },
   },
+  optimizeDeps: {
+    exclude: ['js-big-decimal']
+  }
 })

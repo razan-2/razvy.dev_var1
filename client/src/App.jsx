@@ -8,6 +8,7 @@ import About from "./pages/About"
 import NotFound from "./pages/NotFound"
 import ContactMe from "./pages/ContactMe"
 import Services from "./pages/Services"
+import BlogPost from "./components/Blog/BlogPost"
 
 const Layout = () => {
   return (
@@ -42,12 +43,16 @@ function App() {
           element: <ContactMe />
         },
         {
+          path: '/services',
+          element: <Services />
+        },
+        {
           path: '/side-quests',
           element: <BlogPage />
         },
         {
-          path: '/services',
-          element: <Services />
+          path: '/side-quests/:id',
+          element: <BlogPost />
         },
         {
           path: '*',

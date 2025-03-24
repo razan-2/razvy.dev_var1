@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react"
 import { useGlitch } from "@/hooks/use-glitch"
 import { X, Send, ChevronRight, AlertCircle, CheckCircle, Terminal, Code, Zap } from "lucide-react"
 import BlogPostCard from "./BlogPostCard"
+import useBlogStore from "@/state/useBlogStore"
+import { Loading } from "../Loading/Loading"
+import { useParams } from "react-router-dom"
 
 // Mock data for blog posts
 const blogPosts = [
@@ -136,6 +139,12 @@ export default function BlogPage() {
       return () => clearTimeout(timer)
     }
   }, [animationState.subtitleComplete])
+
+  const { displayBlogs, fetchDisplayBlogs } = useBlogStore();
+
+  useEffect(() => {
+    fetchDisplayBlogs();
+  }, [fetchDisplayBlogs]);
 
   useEffect(() => {
     if (animationState.descriptionVisible) {
@@ -364,9 +373,13 @@ export default function BlogPage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {blogPosts.map((post) => (
-              <BlogPostCard key={post.id} post={post} />
-            ))}
+              {displayBlogs.length === 0 ? (
+                <Loading />
+              ) : (
+              displayBlogs.map((blog) => (
+                <BlogPostCard key={blog.id} post={blog} />
+              ))
+            )}
           </div>
         </div>
       </section>

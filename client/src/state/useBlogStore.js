@@ -141,12 +141,12 @@ const useBlogStore = create((set) => ({
           public: blog.public,
           description: blog.description,
           subject: blog.subject,
-          date: blog.date?.toDate() || null, // Convert Firestore Timestamp to JS Date
+          createdAt: blog.date?.toDate() || null, // Convert Firestore Timestamp to JS Date
           photo: blog.photo || null,
-          whatBothersMe: blog["what-bothers-me"] || [],
+          whatBothersMeSections: blog["what-bothers-me"] || [],
           quoteOfTheWeek: blog["quote-of-the-week"] || null,
-          whatIsNewInTech: blog["what-is-new-in-tech"] || [],
-          doseOfTechStories: blog["dose-of-tech-stories"] || [],
+          techStories: blog["what-is-new-in-tech"] || [],
+          techStories2: blog["dose-of-tech-stories"] || [],
           comments: blog.comments || [],
         };
       } else {

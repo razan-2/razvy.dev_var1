@@ -1,10 +1,15 @@
-"use client"
-
-import { useState, useRef } from "react"
+import { useState } from "react"
+import { useInView } from "react-intersection-observer"
 import { useGlitch } from "@/hooks/use-glitch"
 import { GlitchText } from "@/lib/glitch-text"
 import { randomGlitch } from "@/lib/glitch-effects"
 
+/**
+ * CommentsSection - A section for user comments and comment form
+ *
+ * @param {Object} props
+ * @param {Array} props.comments - Array of comment objects
+ */
 const CommentsSection = ({ comments: initialComments }) => {
   const [comments, setComments] = useState(initialComments || [])
   const [newComment, setNewComment] = useState({
@@ -13,7 +18,11 @@ const CommentsSection = ({ comments: initialComments }) => {
     comment: "",
   })
 
-  const sectionRef = useRef(null)
+  const { ref: sectionRef, inView: sectionInView } = useInView({
+    threshold: 0.2,
+    triggerOnce: false,
+  })
+
   const { setRef: setTitleRef } = useGlitch({
     randomInterval: true,
     intervalMin: 5000,
@@ -51,6 +60,7 @@ const CommentsSection = ({ comments: initialComments }) => {
       className={`
         mt-16 pt-8 border-t-4 border-white
         transition-all duration-700 
+        ${sectionInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}
       `}
     >
       <h2 ref={(el) => setTitleRef(el)} className="text-3xl font-mono font-bold mb-8">
@@ -60,11 +70,11 @@ const CommentsSection = ({ comments: initialComments }) => {
       <div className="space-y-8 mb-12">
         {comments.map((comment, index) => {
           // Format date
-          const formattedDate = new Date(comment.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })
+          // const formattedDate = comment.date.toLocaleDateString("en-US", {
+          //   year: "numeric",
+          //   month: "short",
+          //   day: "numeric",
+          // })
 
           return (
             <div
@@ -74,7 +84,7 @@ const CommentsSection = ({ comments: initialComments }) => {
             >
               <div className="flex justify-between items-baseline mb-2">
                 <h3 className="text-xl font-mono font-bold text-[#00ff00]">{comment.user}</h3>
-                <span className="text-xs font-mono opacity-70">{formattedDate}</span>
+                <span className="text-xs font-mono opacity-70">{comment.date.toLocaleDateString()}</span>
               </div>
               <p className="font-mono">{comment.comment}</p>
             </div>

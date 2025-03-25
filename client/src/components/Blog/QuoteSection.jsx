@@ -1,10 +1,22 @@
-"use client"
-
-import { useRef } from "react"
+import { useInView } from "react-intersection-observer"
 import { useGlitch } from "@/hooks/use-glitch"
+import { randomGlitch } from "@/lib/glitch-effects"
 
+/**
+ * QuoteSection - A section for "Quote of the Week"
+ *
+ * @param {Object} props
+ * @param {Object} props.quote - Quote data
+ * @param {string} props.quote.quote - The quote text
+ * @param {string} props.quote.author - Quote author
+ * @param {string|null} props.quote.photo - Background image URL or null
+ */
 const QuoteSection = ({ quote }) => {
-  const quoteRef = useRef(null)
+  const { ref: quoteRef, inView: quoteInView } = useInView({
+    threshold: 0.3,
+    triggerOnce: false,
+  })
+
   const { setRef: setQuoteRef } = useGlitch({
     randomInterval: true,
     intervalMin: 4000,
@@ -19,7 +31,9 @@ const QuoteSection = ({ quote }) => {
       ref={quoteRef}
       className={`
         my-16 transition-all duration-1000
+        ${quoteInView ? "opacity-100 scale-100" : "opacity-0 scale-95"}
       `}
+      onMouseEnter={(e) => randomGlitch(e.currentTarget, 300)}
     >
       <h2 className="text-3xl font-mono font-bold border-l-4 border-[#ffff00] pl-4 mb-8 text-[#ffff00]">
         QUOTE_OF_THE_WEEK
@@ -29,7 +43,7 @@ const QuoteSection = ({ quote }) => {
         <div className="relative">
           <div className="relative w-full aspect-video mb-6 border-4 border-[#ffff00] overflow-hidden">
             <img
-              src={quote.photo || "/placeholder.svg"}
+              src={quote.photo || "/placeholder.svg?height=400&width=600"}
               alt="Quote background"
               className="w-full h-full object-cover"
             />

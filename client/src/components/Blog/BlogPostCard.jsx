@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useGlitch } from "@/hooks/use-glitch"
 import { ChevronRight } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export default function BlogPostCard({ post }) {
   const [isHovered, setIsHovered] = useState(false)
@@ -31,12 +32,12 @@ export default function BlogPostCard({ post }) {
           className={`absolute inset-0 bg-black bg-opacity-70 p-6 flex flex-col justify-between transition-opacity duration-300 ${isHovered ? "opacity-0" : "opacity-100"}`}
         >
           <div>
-            <p className="text-neon-green font-bold tracking-wider mb-2">{post.subtitle}</p>
+            <p className="text-neon-green font-bold tracking-wider mb-2">{post.id}</p>
             <h3 className="text-3xl font-bold mb-4">{post.title}</h3>
           </div>
 
           <ul className="flex flex-wrap gap-2">
-            {post.subjects.map((subject, index) => (
+            {post.subject.map((subject, index) => (
               <li key={index} className="bg-white text-black text-xs px-2 py-1 uppercase font-bold">
                 {subject}
               </li>
@@ -51,12 +52,14 @@ export default function BlogPostCard({ post }) {
           <div className="border-l-4 border-neon-green pl-3">
             <p className="text-neon-green font-bold tracking-wider mb-2">{post.subtitle}</p>
             <h3 className="text-3xl font-bold mb-4 text-white">{post.title}</h3>
-            <p className="text-white text-lg leading-relaxed">{post.excerpt}</p>
+            <p className="text-white text-lg leading-relaxed">{post.description}</p>
           </div>
 
           <div className="flex justify-end">
             <span className="uppercase font-bold flex items-center text-neon-green group-hover:animate-pulse">
-              Read More <ChevronRight size={16} className="ml-1" />
+              <Link to={`/side-quests/${post.id}`}>
+                Read More <ChevronRight size={16} className="ml-1" />
+              </Link>
             </span>
           </div>
         </div>

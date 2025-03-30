@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound"
 import ContactMe from "./pages/ContactMe"
 import Services from "./pages/Services"
 import BlogPost from "./components/Blog/BlogPost"
+import PortfolioPage from "./pages/Portfolio"
 
 const Layout = () => {
   return (
@@ -53,6 +54,10 @@ function App() {
         {
           path: '/services',
           element: <Services />
+        },
+        {
+          path: '/portfolio',
+          element: <PortfolioPage />
         },
         {
           path: '*',

@@ -2,6 +2,7 @@ import Testimonials from "@/components/HomePage/Testimonials";
 import HeroSection from "../components/HomePage/HeroSection";
 import MessageMe from "@/components/MessageForm/MessageMe";
 import WhoAmISection from "@/components/HomePage/WhoAmI.jsx";
+import Portfolio from "@/components/HomePage/Portfolio";
 
 const Home = () => {
     return (  
@@ -16,6 +17,7 @@ const Home = () => {
                     <Testimonials />
                 </div>
             </div>
+            <Portfolio />
             <MessageMe />
         </main>
     );
